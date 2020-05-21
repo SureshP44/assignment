@@ -1,0 +1,55 @@
+import java.util.*;
+import java.lang.*;
+
+public class newJavaFile {
+
+  public static int getMaxProfit(int[] wt, int[] pr, int totalCapacity) {
+    if(wt.length == 0 || pr.length == 0 || totalCapacity <= 0) {
+      return 0;
+    }
+    
+    int numberOfWeights = wt.length;
+    
+    int[][] arr = new int[numberOfWeights][totalCapacity + 1];
+    
+    for(int i = 0; i < numberOfWeights; i++) {
+        
+      for(int j = 1; j <= totalCapacity; j++) {
+        //if(pr[i]!=-1){
+        int includingCurrentWeightProfit = Integer.MAX_VALUE;
+        int excludingCurrentWeightProfit = Integer.MAX_VALUE;
+        
+        if(wt[i] <= j) {
+          includingCurrentWeightProfit = pr[i] + arr[i][j - wt[i]];
+        }
+        
+        if(i > 0) {
+          excludingCurrentWeightProfit = arr[i - 1][j];
+        }
+        
+        arr[i][j] = Math.min(includingCurrentWeightProfit, excludingCurrentWeightProfit);
+      }}
+    //}
+    
+    return arr[numberOfWeights - 1][totalCapacity];
+  }
+  
+  public static void main(String[] args) {
+    Scanner sc= new Scanner(System.in);   
+    int[] wt = {10, 20, 40, 80, 160, 320};
+    int[] prNewYork = {120, 230, 450, 774, 1400, 2820};
+    int[] prIndia = {140, 0, 413, 890, 1300, 2970};
+    int[] prChina = {110, 200, 0, 670, 1180, 0};
+    System.out.println("Enter the total units");
+    int totalCapacity = Integer.parseInt(sc.nextLine());
+    System.out.println("Enter the hrs");
+    int hrs = Integer.parseInt(sc.nextLine());
+    int cost = newJavaFile.getMaxProfit(wt, prNewYork, totalCapacity);
+    System.out.println("Region: NewYork Total_cost"+(cost*hrs));
+    cost = newJavaFile.getMaxProfit(wt, prIndia, totalCapacity);
+    System.out.println("Region: India Total_cost"+(cost*hrs));
+    cost = newJavaFile.getMaxProfit(wt, prChina, totalCapacity);
+    System.out.println("Region: China Total_cost"+(cost*hrs));
+  }
+
+}
