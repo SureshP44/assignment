@@ -1,6 +1,4 @@
 import java.util.*;
-import java.lang.*;
-
 public class newJavaFile {
 
   public static int getMaxProfit(int[] wt, int[] pr, int totalCapacity) {
@@ -15,7 +13,7 @@ public class newJavaFile {
     for(int i = 0; i < numberOfWeights; i++) {
         
       for(int j = 1; j <= totalCapacity; j++) {
-        //if(pr[i]!=-1){
+        if(pr[i]!=0){
         int includingCurrentWeightProfit = Integer.MAX_VALUE;
         int excludingCurrentWeightProfit = Integer.MAX_VALUE;
         
@@ -28,8 +26,11 @@ public class newJavaFile {
         }
         
         arr[i][j] = Math.min(includingCurrentWeightProfit, excludingCurrentWeightProfit);
-      }}
-    //}
+      }
+        else{
+            arr[i][j] = Integer.MAX_VALUE;
+        }}
+    }
     
     return arr[numberOfWeights - 1][totalCapacity];
   }
@@ -41,9 +42,10 @@ public class newJavaFile {
     int[] prIndia = {140, 0, 413, 890, 1300, 2970};
     int[] prChina = {110, 200, 0, 670, 1180, 0};
     System.out.println("Enter the total units");
-    int totalCapacity = Integer.parseInt(sc.nextLine());
+    int totalCapacity = 1150;
+//Integer.parseInt(sc.nextLine());
     System.out.println("Enter the hrs");
-    int hrs = Integer.parseInt(sc.nextLine());
+    int hrs = 5;// Integer.parseInt(sc.nextLine());
     int cost = newJavaFile.getMaxProfit(wt, prNewYork, totalCapacity);
     System.out.println("Region: NewYork Total_cost"+(cost*hrs));
     cost = newJavaFile.getMaxProfit(wt, prIndia, totalCapacity);
